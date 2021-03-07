@@ -25,7 +25,7 @@ public:
 	//to do doxy comments
 	Vector();
 	~Vector();
-	T GetVector(int i);
+	T GetVector(int i) const;
 	void SetVector(T input, int i);
 
 private:
@@ -55,7 +55,7 @@ Vector<T>::~Vector()
 
 //Gets the element in the index i of the vector
 template<class T>
-T Vector<T>::GetVector(int i)
+T Vector<T>::GetVector(int i) const
 {
 	return array[i];
 }
