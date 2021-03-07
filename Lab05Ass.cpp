@@ -4,12 +4,34 @@
 #include <iostream>
 #include "vector.h"
 #include "date.h"
+#include "TIME.h"
+using namespace std;
+
+//creates a struct with name WindLogType
+typedef struct {
+    Date d;
+    Time t;
+    float speed;
+} WindLogType;
+
 
 int main()
 {
-    Date theDate = Date(22, "Dec", 1993);
-    theDate.GetDay();
-    theDate.GetMonth();
-    theDate.GetYear();
+    //creates Vector class DynArray of WindLogType named windlog.
+    Vector<WindLogType> windlog;
+
+    /* Template for reading files
+    //reads input file into ifstream
+    ifstream infile("MetData-31-3.csv");
+    if (!infile) return -1;
+    //ifstream to T obj via overload
+    infile >> windlog;
+
+    //writes ofstream to output file
+    ofstream ofile("routput.txt");
+    //R obj to ofstream
+    ofile << R;
+    */
+
 }
 

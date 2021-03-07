@@ -15,22 +15,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab05Ass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DATE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UnitTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TIME.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lab05Ass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DATE.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DATE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TIME.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MetData_Mar01-2014-Mar01-2015-ALL.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="MetData-31-3.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SensorCodes.rtf">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
