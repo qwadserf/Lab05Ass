@@ -6,7 +6,7 @@ Date::Date()
 {
 }
 
-Date::Date(int d, string m, int y)
+Date::Date(int d, int m, int y)
 {
     day = d;
     month = m;
@@ -18,7 +18,7 @@ int Date::GetDay() const
     return day;
 }
 
-string Date::GetMonth() const
+int Date::GetMonth() const
 {
     return month;
 }
@@ -33,7 +33,7 @@ void Date::SetDay(int d)
     day = d;
 }
 
-void Date::SetMonth(string m)
+void Date::SetMonth(int m)
 {
     month = m;
 }
@@ -42,6 +42,7 @@ void Date::SetYear(int y)
 {
     year = y;
 }
+
 
 ostream& operator << (ostream& output, const Date& D)
 {
@@ -55,14 +56,15 @@ istream& operator >> (istream& input, Date& D)
     string temp;
     int tempInt;
     //get set for day (int)
-    getline(input, temp, ',');
+    getline(input, temp, '/');
     tempInt = stoi(temp);
     D.SetDay(tempInt);
-    //get set for month
-    getline(input, temp, ',');
-    D.SetMonth(temp);
+    //get set for month (int)
+    getline(input, temp, '/');
+    tempInt = stoi(temp);
+    D.SetMonth(tempInt);
     //get set for year (int)
-    getline(input, temp);
+    getline(input, temp, ' ');
     tempInt = stoi(temp);
     D.SetYear(tempInt);
 

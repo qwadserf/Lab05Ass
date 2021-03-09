@@ -128,56 +128,5 @@ void Vector<T>::ExpandVector()
 }
 
 
-/* idk some shit for reading files into the Vector template class.
-* Probably not the way to do it since T doesn't know how many variables to write into. 
-* Most likely have to convert the struct WindLogType into a class then implement the iostream from there, instead of here.
-template <class T>
-ostream& operator << (ostream& output, const T &Q)
-{
-	output << "  Student ID:   " << R.GetStudentId() << endl
-		<< "  Semester:     " << R.GetSemester() << endl << endl;
-
-	//writes the invidual result
-	for (int i = 0; i < R.GetCount(); i++)
-	{
-		output << R.GetResult(i) << endl;
-	}
-
-	output << "Number of units = " << R.GetCount() << endl << "Total credits   = " << R.GetCredits() << endl;
-
-	return output;
-}
-
-template <class T>
-istream& operator >> (istream& input, T &Q)
-{
-	string temp;
-	Result tempResult[MaxResults];
-	//get set student ID
-	getline(input, temp, ',');
-	R.SetStudentId(stol(temp));
-	//get set semester
-	getline(input, temp, ',');
-	R.SetSemester(stoul(temp));
-	//get set count of units
-	getline(input, temp);
-	R.SetCount(stoul(temp));
-
-	for (int i = 0; i < R.GetCount(); i++) {
-		//overloaded >> operator
-		input >> tempResult[i];
-	}
-
-	//sets the tempResult array to actual R obj array
-	R.SetResult(tempResult);
-
-	return input;
-
-}
-*/
-
-
-
-
 #endif
 

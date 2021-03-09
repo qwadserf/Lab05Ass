@@ -29,7 +29,7 @@ public:
      * @param m - the month
      * @param y - the year
     */
-    Date(int d, string m, int y);
+    Date(int d, int m, int y);
 
     /**
      * @brief get day
@@ -41,7 +41,7 @@ public:
      * @brief get month
      * @return month
     */
-    string GetMonth() const;
+    int GetMonth() const;
 
     /**
      * @brief get year
@@ -59,7 +59,7 @@ public:
      * @brief sets month
      * @param m - the month
     */
-    void SetMonth(string m);
+    void SetMonth(int m);
 
     /**
      * @brief sets year
@@ -70,7 +70,7 @@ public:
 
 private:
     int day;
-    string month;
+    int month;
     int year;
 };
 

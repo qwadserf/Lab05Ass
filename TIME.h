@@ -54,7 +54,6 @@ public:
     */
     void SetMin(int m);
 
-
 private:
     int hour;
     int min;

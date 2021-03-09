@@ -32,6 +32,7 @@ void Time::SetMin(int m)
     min = m;
 }
 
+
 ostream& operator << (ostream& output, const Time& T)
 {
     output << "  Time:    " << T.GetHour() << ':' << T.GetMin() << endl;

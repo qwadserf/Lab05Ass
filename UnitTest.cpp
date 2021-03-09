@@ -1,17 +1,30 @@
 //It's for unit testing.
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
 #include "vector.h"
 #include "date.h"
 #include "TIME.h"
 using namespace std;
+
+//creates a struct with name WindLogType
+typedef struct
+{
+    Date d;
+    Time t;
+    float speed;
+} WindLogType;
+
+//function to print the WindLogType
+void PrintWind(WindLogType w);
+
 int main()
 {
     //unit testing for date class
     cout << "Unit testing for the date class:" << endl;
-    Date theDate = Date(22, "Dec", 1993);
+    Date theDate = Date(22, 12, 1993);
     cout << theDate.GetDay() << "/" << theDate.GetMonth() << "/" << theDate.GetYear() << endl;
 
     //unit testing for time class
@@ -29,12 +42,12 @@ int main()
     //filling some Date objects in
     int count = 0;
     //testing SetVector method
-    dateList.SetVector(Date(23, "Jan", 1970), count++);
-    dateList.SetVector(Date(03, "Feb", 1960), count++);
-    dateList.SetVector(Date(05, "Mar", 1969), count++);
-    dateList.SetVector(Date(06, "Apr", 1943), count++);
-    dateList.SetVector(Date(31, "May", 1855), count++);
-    dateList.SetVector(Date(14, "Jun", 1977), count++);
+    dateList.SetVector(Date(23, 01, 1970), count++);
+    dateList.SetVector(Date(03, 02, 1960), count++);
+    dateList.SetVector(Date(05, 03, 1969), count++);
+    dateList.SetVector(Date(06, 04, 1943), count++);
+    dateList.SetVector(Date(31, 05, 1855), count++);
+    dateList.SetVector(Date(14, 06, 1977), count++);
     
     cout << "Count: " << count << endl;
 
@@ -46,8 +59,86 @@ int main()
         cout << tempDate.GetDay() << "/" << tempDate.GetMonth() << "/" << tempDate.GetYear() << endl;
     }
 
+    //testing the struct WinLogType.
+    cout << endl << "Unit testing for the struct WindLogType:" << endl;
+    //declare vector of WindLogType called windlog
+    Vector<WindLogType> windlog;
+    //assign a new WindLogType some values
+    WindLogType oneLog;
+    oneLog.d = Date(8, 03, 2021);
+    oneLog.t = Time(13, 07);
+    oneLog.speed = 6;
+    //insert the WindLogType obj into the dynArray
+    windlog.SetVector(oneLog, 0);
+    //then get it, assign to new WLT obj
+    WindLogType newLog = windlog.GetVector(0);
+    //Then print the details in the new obj
+    cout << '\n' << newLog.d.GetDay() << '/' << newLog.d.GetMonth() << '/' << newLog.d.GetYear() << '\t';
+    cout << newLog.t.GetHour() << ":" << setfill('0') << setw(2) << newLog.t.GetMin() <<  '\t';
+    cout << newLog.speed << endl;
+
+    //testing file input. 
+    cout << endl << "Unit testing for file inputs: " << endl;
+    string fileName = "MetData-31-3.csv";
+    ifstream inFile(fileName);
+    istream& input = inFile;
+    int countTwo = 0;
+    //columns is the number of columns in the data file.
+    const int columns = 18;
+    string tempStr;
+
+    //gets the first line then discards it, as they are the names of the columns.
+    getline(input, tempStr);
+    //process each line of the file. 
+    while (!inFile.eof())
+    {
+        //declare temp WindLogType
+        WindLogType tempWind;
+        
+        //now iterates across the columns and exracts the required columns.
+        for (int i = 0; i < columns; i++)
+        {   
+            //to split the date and time values in column 1
+            if (i == 0)
+            {
+                input >> tempWind.d;
+                input >> tempWind.t;
+            }
+            //to get the wind
+            else if (i == 10)
+            {
+                getline(input, tempStr, ',');
+                tempWind.speed = stof(tempStr);
+            }
+            //to get the last column since delimiter is '\n'
+            else if (i == (columns - 1))
+            {
+                getline(input, tempStr);
+            }
+            //else get based on delimiter ','
+            else 
+            {
+                getline(input, tempStr, ',');
+            }
+        }
+        //set the tempWind into the windLog array.
+        windlog.SetVector(tempWind, countTwo);
+        //keep track of number of data lines. For sample should be 90.
+        countTwo++;
+    }
+
+    //testing windlog output.
+    for (int i = 0; i < countTwo; i++)
+    {
+        PrintWind(windlog.GetVector(i));
+    }
 
 
+} //end main
 
-
-}
+void PrintWind(WindLogType w)
+{
+    cout << "Date:  " << setw(2) << setfill('0') << w.d.GetDay() << '/' << setw(2) << w.d.GetMonth() << '/' << w.d.GetYear() << endl;
+    cout << "Time:  " << setw(2) << w.t.GetHour() << ":" << setw(2) << w.t.GetMin() << endl;
+    cout << "Wind:  " << w.speed << '\n' << endl;
+};
