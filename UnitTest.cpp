@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <cmath>
 #include "vector.h"
 #include "date.h"
 #include "TIME.h"
@@ -127,11 +128,48 @@ int main()
         countTwo++;
     }
 
-    //testing windlog output.
+    //add unique speeds to windspeeds
+    //iterate thru windlog. If match, don't add to windspeeds. 
+    //If no match, add the new speed to windspeeds
+    Vector<float> windspeeds;
+    int windspeedCount = 0;
+    for (int i = 0; i < countTwo; i++)
+    {
+        bool windspeedFound = false;
+        float spdToAdd = windlog.GetVector(i).speed;
+        for (int j = 0; j < windspeedCount; j++)
+        {
+            if (windspeeds.GetVector(j) == spdToAdd)
+            {
+                windspeedFound = true;
+                break;
+            }
+        }
+        //if does not exist, add the spd to windspeeds array.
+        if (windspeedFound == false)
+        {
+            windspeeds.SetVector(spdToAdd, windspeedCount);
+            windspeedCount++;
+        }
+    }
+    cout << "wind speeds experienced: " << endl;
+    for (int i = 0; i < windspeedCount; i++)
+    {
+        cout << windspeeds.GetVector(i) << '\t';
+    }
+    cout << endl;
+
+    //testing windlog output, and getting the sum and avg
+    float sum = 0.0f;
+    float avg = 0.0f;
     for (int i = 0; i < countTwo; i++)
     {
         PrintWind(windlog.GetVector(i));
+        sum += windlog.GetVector(i).speed;
     }
+    avg = sum / (countTwo + 1);
+    cout << fixed << setprecision(2) << "Average wind speed for " << (countTwo + 1) << " entries is " << avg << endl;
+    cout << fixed << setprecision(0) << "Average wind speed for " << (countTwo + 1) << " entries is " << round(avg);
 
 
 } //end main
